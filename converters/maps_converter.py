@@ -30,10 +30,7 @@ class MapsConverter:
         cursor = conn.cursor()
 
         cursor.execute("""
-            SELECT
-                ID,
-                MapFile,
-                SMMapFile
+            SELECT ID, Name, MapFile, SMMapFile
             FROM t_maps
         """)
 
@@ -45,33 +42,47 @@ class MapsConverter:
         for row in rows:
 
             circuit_id = str(row["ID"])
+            circuit_name = row["Name"] if row["Name"] else f"Circuit {circuit_id}"
             map_file = row["MapFile"]
             sm_map_file = row["SMMapFile"]
 
             target_dir = os.path.join(new_maps_root, circuit_id)
             os.makedirs(target_dir, exist_ok=True)
 
+            map_copied    = False
+            sm_map_copied = False
+
             # MAP
             if map_file:
-                self._copy_file(
+                map_copied = self._copy_file(
                     os.path.join(old_maps_dir, map_file),
                     os.path.join(target_dir, map_file)
                 )
 
             # CMAP
             if sm_map_file:
-                self._copy_file(
+                sm_map_copied = self._copy_file(
                     os.path.join(old_sm_maps_dir, sm_map_file),
                     os.path.join(target_dir, sm_map_file)
                 )
 
+            if map_copied and sm_map_copied:
+                Logger.ok(f"{circuit_name}: map and SM map copied")
+            elif map_copied:
+                Logger.warn(f"{circuit_name}: only map copied, SM map missing")
+            elif sm_map_copied:
+                Logger.warn(f"{circuit_name}: only SM map copied, map missing")
+            else:
+                Logger.warn(f"{circuit_name}: no files copied")
+
             copied += 1
 
-        Logger.info(f"[TRACK MAPS] Processed {copied} circuits")
+        Logger.info(f"Processed {copied} circuits")
 
-    def _copy_file(self, src, dst):
+    def _copy_file(self, src, dst) -> bool:
         if not os.path.exists(src):
-            Logger.warn(f"[WARN] Missing file: {src}")
-            return
+            Logger.warn(f"Missing file: {src}")
+            return False
 
         shutil.copy2(src, dst)
+        return True
