@@ -1,13 +1,18 @@
 from converters.db_converter import DbConverter
+from converters.folders_converter import FoldersConverter
 from converters.maps_converter import MapsConverter
+from converters.custom_images_converter import CustomImagesConverter
 from services.logger import Logger
+
 
 
 class MigrationService:
 
     def __init__(self):
         self.db_converter = DbConverter()
+        self.folders_converter = FoldersConverter()
         self.maps_converter = MapsConverter()
+        self.custom_images_converter = CustomImagesConverter()
 
     def import_all(self, old_path, new_path):
 
@@ -24,8 +29,12 @@ class MigrationService:
             Logger.ok("Track maps conversion completed")
 
             Logger.info("Converting images...")
-            # image_converter.convert(...)
+            self.custom_images_converter.convert(old_path, new_path)
             Logger.ok("Images conversion completed")
+
+            Logger.info("Copying folders...")
+            self.folders_converter.convert(old_path, new_path)
+            Logger.ok("Folders copy completed")
 
             Logger.ok("Import completed")
 

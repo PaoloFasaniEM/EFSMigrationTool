@@ -31,7 +31,6 @@ class CircuitsMapper:
         c.sm_map_file_hash                          = row["MapHash"]
         c.flag_set                                  = row["FlagSet"]
         c.password                                  = row["Password"]
-        c.starting_lights_control_unit_id           = row["StartingLightsControlUnitId"] 
         c.aks_timing_server_id                      = row["AksTimingServerId"]
 
         if row["TracksidePanelsBrightness"] == '-1':  c.track_side_panel_brightness = 0
@@ -50,12 +49,12 @@ class CircuitsMapper:
         c.white_button_mode                         = row["MarshalConsoleWhiteButtonMode"]
         c.car_blue_flag_follow_on_panels            = row["AutoBlueFlagFollowOnPanels"]
         c.car_blue_flag_show                        = row["AutoBlueFlagVisualizationMode"]
-
+        
         raw = row["StartingLightsControlUnitId"]
-        if raw:
-            c.starting_lights_control_unit_id = int(str(raw).split(",")[0].strip())
+        if raw and str(raw).strip():
+            c.starting_lights_control_unit_id = str(raw).split(",")[0].strip()
         else:
-            c.starting_lights_control_unit_id = None
+            c.starting_lights_control_unit_id = ""
 
         settings = 0
         if row["MarshalConsoleRedAndSCEnabled"] == '1':                        settings |= 0x001  # RedAndSCEnabled
@@ -67,6 +66,7 @@ class CircuitsMapper:
         if row["MarshalConsoleYellowSlipperyEnabled"] == '1':                  settings |= 0x040  # YellowSlipperyEnabled
         if row["MarshalConsoleRainAsFlagEnabled"] == '1':                      settings |= 0x080  # RainAsFlagEnabled
         if row["MarshalConsoleYellowDoubleYellowWhenSCandVSCEnabled"] == '1':  settings |= 0x100  # YellowDoubleYellowWhenSCandVSCEnabled
+        if row["MarshalConsoleYellowDoubleYellowWhenSlowDownZone"] == '1':     settings |= 0x200  # YellowDoubleYellowWhenSlowDownZone
         c.marshal_console_settings = settings
         
 
@@ -74,6 +74,9 @@ class CircuitsMapper:
         if row["RedFlagSectorPolicyAllowYellow"] == '1': red_flag_policy |= 0x1  # AllowYellow
         if row["RedFlagSectorPolicyLeaveYellow"] == '1': red_flag_policy |= 0x2  # LeaveYellow
         c.red_flag_policy = red_flag_policy
+
+        c.safety_car_policy            = row["SafetyCarSectorPolicies"]
+        c.rolling_start_speed_settings = row["RollingStartSpeedSettings"]   
 
         return c
 
@@ -106,11 +109,13 @@ class CircuitsMapper:
                 CarBlueFlagFollowOnPanels,
                 CarBlueFlagShow,
                 RedFlagPolicy,
+                SafetyCarPolicy,
                 TimingMasterRole,
                 UseYellowFlagForFCYEnabled,
                 TrackPanelsBlacksDisplayMode,
-                UseThreeStripesYellowRedFlagEnabled
-            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                UseThreeStripesYellowRedFlagEnabled,
+                RollingStartSpeedSettings
+            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
         """
 
         new_cursor.executemany(sql, [c.to_db_tuple() for c in circuits])

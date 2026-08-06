@@ -1,10 +1,27 @@
 import os
 import sqlite3
 
+from converters.mappers.parameters_mapper import ParametersMapper
 from converters.mappers.alkamel_timing_mapper import AlkamelTimingMapper
 from converters.mappers.cars_mapper import CarsMapper
+from converters.mappers.championships_mapper import ChampionshipsMapper
 from converters.mappers.circuits_mapper import CircuitsMapper
+from converters.mappers.circuit_disabled_rules_mapper import CircuitDisabledRulesMapper
+from converters.mappers.circuit_alternative_rule_groups_mapper import CircuitAlternativeRuleGroupsMapper
+from converters.mappers.circuit_panel_sets_mapper import CircuitPanelSetsMapper
+from converters.mappers.circuit_rule_sets_mapper import CircuitRuleSetsMapper
+from converters.mappers.saved_rule_sets_mapper import SavedRuleSetsMapper
+from converters.mappers.saved_rule_sets_alternative_groups_mapper import SavedRuleSetsAlternativeGroupsMapper
+from converters.mappers.saved_rule_sets_disabled_mapper import SavedRuleSetsDisabledMapper
+from converters.mappers.circuit_flag_frequencies_mapper import CircuitFlagFrequenciesMapper
+from converters.mappers.circuit_flag_modes_mapper import CircuitFlagModesMapper
+from converters.mappers.circuit_info_panel_penalty_rendering_mapper import CircuitInfoPanelPenaltyRenderingMapper
+from converters.mappers.circuit_sectors_mapper import CircuitSectorsMapper
+from converters.mappers.circuit_speed_limits_mapper import CircuitSpeedLimitsMapper
 from converters.mappers.circuit_slow_down_zones_mapper import CircuitSlowDownZonesMapper
+from converters.mappers.custom_images_mapper import CustomImagesMapper
+from converters.mappers.em_t_panel_custom_images_mapper import EMTPanelCustomImagesMapper
+from converters.mappers.em_info_panel_custom_images_mapper import EMInfoPanelCustomImagesMapper
 from converters.mappers.ethernet_panels_mapper import EthernetPanelsMapper
 from converters.mappers.saved_grid_countdowns_mapper import SavedGridCountdownsMapper
 from converters.mappers.saved_messages_mapper import SavedMessagesMapper
@@ -19,19 +36,36 @@ from services.logger import Logger
 class DbConverter:
 
     def __init__(self):
-        self.alkamel_timing_mapper                  = AlkamelTimingMapper()
-        self.cars_mapper                            = CarsMapper()
-        self.circuits_mapper                        = CircuitsMapper()
-        self.circuit_slow_down_zones_mapper         = CircuitSlowDownZonesMapper()
-        self.ethernet_panels_mapper                 = EthernetPanelsMapper()
-        self.saved_grid_countdowns_mapper           = SavedGridCountdownsMapper()
-        self.saved_messages_mapper                  = SavedMessagesMapper()
-        self.saved_sessions_mapper                  = SavedSessionsMapper()
-        self.session_manager_feeders_mapper         = SessionManagerFeedersMapper()
-        self.smart_marshalling_clients_mapper       = SmartMarshallingClientsMapper()
-        self.starting_lights_control_units_mapper   = StartingLightsControlUnitsMapper()
-        self.third_party_panels_servers_mapper      = ThirdPartyPanelsServersMapper()
-        self.vic_flag_hex_codes_mapper              = VICFlagHexCodesMapper()
+        self.parameters_mapper                              = ParametersMapper()
+        self.alkamel_timing_mapper                          = AlkamelTimingMapper()
+        self.cars_mapper                                    = CarsMapper()
+        self.championships_mapper                           = ChampionshipsMapper()
+        self.circuits_mapper                                = CircuitsMapper()
+        self.circuit_disabled_rules_mapper                  = CircuitDisabledRulesMapper()
+        self.circuit_alternative_rule_groups_mapper         = CircuitAlternativeRuleGroupsMapper()
+        self.circuit_panel_sets_mapper                      = CircuitPanelSetsMapper()
+        self.circuit_rule_sets_mapper                       = CircuitRuleSetsMapper()
+        self.saved_rule_sets_mapper                         = SavedRuleSetsMapper()
+        self.saved_rule_sets_alternative_groups_mapper      = SavedRuleSetsAlternativeGroupsMapper()
+        self.saved_rule_sets_disabled_mapper                = SavedRuleSetsDisabledMapper()
+        self.circuit_flag_frequencies_mapper                = CircuitFlagFrequenciesMapper()
+        self.circuit_flag_modes_mapper                      = CircuitFlagModesMapper()
+        self.circuit_info_panel_penalty_rendering_mapper    = CircuitInfoPanelPenaltyRenderingMapper()
+        self.circuit_sectors_mapper                         = CircuitSectorsMapper()
+        self.circuit_speed_limits_mapper                    = CircuitSpeedLimitsMapper()
+        self.circuit_slow_down_zones_mapper                 = CircuitSlowDownZonesMapper()
+        self.custom_images_mapper                           = CustomImagesMapper()
+        self.em_t_panel_custom_images_mapper                = EMTPanelCustomImagesMapper()
+        self.em_info_panel_custom_images_mapper             = EMInfoPanelCustomImagesMapper()
+        self.ethernet_panels_mapper                         = EthernetPanelsMapper()
+        self.saved_grid_countdowns_mapper                   = SavedGridCountdownsMapper()
+        self.saved_messages_mapper                          = SavedMessagesMapper()
+        self.saved_sessions_mapper                          = SavedSessionsMapper()
+        self.session_manager_feeders_mapper                 = SessionManagerFeedersMapper()
+        self.smart_marshalling_clients_mapper               = SmartMarshallingClientsMapper()
+        self.starting_lights_control_units_mapper           = StartingLightsControlUnitsMapper()
+        self.third_party_panels_servers_mapper              = ThirdPartyPanelsServersMapper()
+        self.vic_flag_hex_codes_mapper                      = VICFlagHexCodesMapper()
 
     def convert(self, old_path, new_path):
 
@@ -75,6 +109,10 @@ class DbConverter:
 
     def _convert_all_tables(self, old_cursor, new_cursor):
 
+            #t_parameters
+            old_parameters = self.parameters_mapper._read_(old_cursor)
+            self.parameters_mapper._write_(new_cursor, old_parameters)
+
             #t_alkamel_timing
             alkamel_timings = self.alkamel_timing_mapper._read_(old_cursor)
             self.alkamel_timing_mapper._write_(new_cursor, alkamel_timings)
@@ -82,10 +120,74 @@ class DbConverter:
             #t_cars
             cars = self.cars_mapper._read_(old_cursor)
             self.cars_mapper._write_(new_cursor, cars)
-            
+
+            #t_championships
+            championships = self.championships_mapper._read_(old_cursor)
+            self.championships_mapper._write_(new_cursor, championships)
+
             #t_circuits
             circuits = self.circuits_mapper._read_(old_cursor)
             self.circuits_mapper._write_(new_cursor, circuits)
+
+            #t_circuit_disabled_rules
+            circuit_disabled_rules = self.circuit_disabled_rules_mapper._read_(old_cursor)
+            self.circuit_disabled_rules_mapper._write_(new_cursor, circuit_disabled_rules)
+
+            #t_circuit_alternative_rule_groups
+            circuit_alternative_rule_groups = self.circuit_alternative_rule_groups_mapper._read_(old_cursor)
+            self.circuit_alternative_rule_groups_mapper._write_(new_cursor, circuit_alternative_rule_groups)
+
+            #t_circuit_panel_sets
+            circuit_panel_sets = self.circuit_panel_sets_mapper._read_(old_cursor)
+            self.circuit_panel_sets_mapper._write_(new_cursor, circuit_panel_sets)
+
+            #t_circuit_rule_sets
+            circuit_rule_sets = self.circuit_rule_sets_mapper._read_(old_cursor)
+            self.circuit_rule_sets_mapper._write_(new_cursor, circuit_rule_sets)
+
+            #t_saved_rule_sets
+            saved_rule_sets = self.saved_rule_sets_mapper._read_(old_cursor)
+            self.saved_rule_sets_mapper._write_(new_cursor, saved_rule_sets)
+
+            #t_saved_rule_sets_alternative_groups
+            saved_rule_sets_alternative_groups = self.saved_rule_sets_alternative_groups_mapper._read_(old_cursor)
+            self.saved_rule_sets_alternative_groups_mapper._write_(new_cursor, saved_rule_sets_alternative_groups)
+
+            #t_saved_rule_sets_disabled
+            saved_rule_sets_disabled = self.saved_rule_sets_disabled_mapper._read_(old_cursor)
+            self.saved_rule_sets_disabled_mapper._write_(new_cursor, saved_rule_sets_disabled)
+
+            #t_circuit_flag_frequencies
+            circuit_flag_frequencies = self.circuit_flag_frequencies_mapper._read_(old_cursor)
+            self.circuit_flag_frequencies_mapper._write_(new_cursor, circuit_flag_frequencies)
+
+            #t_circuit_info_panel_penalty_rendering
+            circuit_info_panel_penalty_rendering = self.circuit_info_panel_penalty_rendering_mapper._read_(old_cursor)
+            self.circuit_info_panel_penalty_rendering_mapper._write_(new_cursor, circuit_info_panel_penalty_rendering)
+
+            #t_circuit_sectors
+            circuit_sectors = self.circuit_sectors_mapper._read_(old_cursor)
+            self.circuit_sectors_mapper._write_(new_cursor, circuit_sectors)
+
+            #t_circuit_speed_limits
+            circuit_speed_limits = self.circuit_speed_limits_mapper._read_(old_cursor)
+            self.circuit_speed_limits_mapper._write_(new_cursor, circuit_speed_limits)
+
+            #t_custom_images
+            custom_images = self.custom_images_mapper._read_(old_cursor)
+            self.custom_images_mapper._write_(new_cursor, custom_images)
+
+            #t_em_info_panel_custom_images
+            em_info_panel_custom_images = self.em_info_panel_custom_images_mapper._read_(old_cursor)
+            self.em_info_panel_custom_images_mapper._write_(new_cursor, em_info_panel_custom_images)
+
+            #t_em_t_panel_custom_images
+            em_t_panel_custom_images = self.em_t_panel_custom_images_mapper._read_(old_cursor)
+            self.em_t_panel_custom_images_mapper._write_(new_cursor, em_t_panel_custom_images)
+
+            #t_marshal_console_button_flag_modes
+            circuit_flag_modes = self.circuit_flag_modes_mapper._read_(old_cursor)
+            self.circuit_flag_modes_mapper._write_(new_cursor, circuit_flag_modes)
 
             #t_slow_zones
             circuit_slow_down_zones = self.circuit_slow_down_zones_mapper._read_(old_cursor)

@@ -1,0 +1,50 @@
+Tabelle vecchie --> nuove
+
+[X] t_alkamel_timing --> t_alkamel_timing
+[X] t_alternative_rule_groups --> t_circuit_alternative_rule_groups
+[X] t_aesys_bitmaps --> t_em_t_panel_aesys_bitmaps (autoprodotta)
+[X] t_custom_logos + t_custom_signs --> t_custom_images
+[X] t_custom_logos + t_custom_signs --> t_em_t_panel_custom_images
+[X] t_custom_logos --> t_em_info_panel_custom_images
+[X] t_disabled_rules --> t_circuit_disabled_rules
+[X] t_em_bitmaps + t_sign_em_bitmaps --> t_em_t_panel_em_bitmaps (autoprodotta)
+[X] t_ethernet_panels --> t_em_t_panels + t_em_info_panels + t_third_party_panels
+[X] t_flag_frequencies + t_silent_flags --> t_circuit_flag_frequencies
+[X] t_ible_bitmaps --> t_em_info_panel_em_bitmaps (autoprodotta)
+[X] t_info_panel_penalty_rendering --> t_circuit_info_panel_penalty_rendering
+[X] t_maps --> t_circuits
+[X] t_maps_alternative_rule_groups --> t_saved_rule_sets_alternative_groups
+[X] t_maps_disabled_rules --> t_saved_rule_sets_disabled
+[X] t_maps_rule_sets --> t_saved_rule_sets
+[X] t_marshal_console_button_flag_modes --> t_circuit_flag_modes
+[X] t_rule_sets --> t_circuit_rule_sets
+[X] t_saved_grid_countdowns --> t_saved_grid_countdowns
+[X] t_saved_messages --> t_saved_messages
+[X] t_saved_sessions --> t_saved_sessions
+[X] t_sector_propagations + t_slow_zones --> t_circuit_sectors
+[X] t_session_manager --> t_session_manager_feeders
+[X] t_sign_aesys_bitmaps --> t_em_t_panel_aesys_bitmaps (autoprodotta)
+[X] t_sign_em_bitmaps --> t_em_t_panel_em_bitmaps (autoprodotta)
+[X] t_slow_zones --> t_circuit_slow_down_zones
+[X] t_smart_marshalling --> t_smart_marshalling_clients
+[X] t_speed_limits --> t_circuit_speed_limits
+[X] t_starting_light_control_units --> t_starting_lights_control_units + t_third_party_scus
+[X] t_third_party_panels_servers --> t_third_party_panels_servers
+[X] t_usb_cars --> t_cars
+[X] t_vic_flag_hex_codes --> t_vic_flag_hex_codes
+[X] t_default_speed_limits --> t_default_speed_limits (autoprodotta)
+[X] t_championships --> t_championships
+[X] t_panel_sets --> t_circuit_panel_sets
+[ ] t_panels + t_panel_names --> t_circuit_panels (da completare)
+[ ] t_parameters --> t_parameters (da completare)
+
+[X] Starting Grid assenti in EFS --> t_em_starting_grid_panels 
+[X] t_usb_panels --> Assenti in EFS nuovo
+[X] t_info_program_pages --> Assenti in EFS nuovo
+[X] t_pitlane_program_pages --> Assenti in EFS nuovo
+[X] t_ups --> Assenti in EFS nuovo
+
+COPIA FILE:
+
+[X] Copia delle mappe e delle SMMappe
+[X] Copia delle sole sources delle CustomImages, (al primo avvio vengono create tutte le immagini derivate e le tabelle xxx_bitmaps)

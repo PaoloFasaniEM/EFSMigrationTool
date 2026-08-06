@@ -31,42 +31,45 @@ class Circuit:
         self.use_three_stripes_yellow_red_flag_enabled: int | None = None
 
         # Campi sospesi - da completare
-        self.marshal_console_settings: int | None = None      # TODO: logica di conversione
-        self.white_button_mode: int | None = None             # TODO: da MarshalConsoleWhiteButtonMode?
-        self.car_blue_flag_follow_on_panels: int | None = None  # TODO: da AutoBlueFlagFollowOnPanels?
-        self.car_blue_flag_show: int | None = None            # TODO: da AutoBlueFlagVisualizationMode?
-        self.red_flag_policy: int | None = None               # TODO: da RedFlagSectorPolicy*?
+        self.marshal_console_settings: int | None = None        
+        self.white_button_mode: int | None = None              
+        self.car_blue_flag_follow_on_panels: int | None = None  
+        self.car_blue_flag_show: int | None = None              
+        self.red_flag_policy: int | None = None
+        self.safety_car_policy: int | None = None  # <- SafetyCarSectorPolicies
+        self.rolling_start_speed_settings: int | None = None  # <- RollingStartSpeedSettings                 
 
     def to_db_tuple(self):
-        
         return (
-            self.id,
-            self.circuit_number,
-            self.name,
-            self.active,
-            self.map_file_name,
-            self.map_file_md5,
-            self.sm_map_file_name,
-            self.sm_map_file_md5,
-            self.sm_map_file_hash,
-            self.flag_set,
-            self.password,
-            self.starting_lights_control_unit_id,
-            self.aks_timing_server_id,
-            self.track_side_panel_brightness,
-            self.info_panel_brightness,
-            self.pitlane_panel_brightness,
-            self.tla_blue_flag_rendering,
-            self.info_panel_rendering,
-            self.marshal_console_settings,
-            self.white_button_mode,
-            self.car_blue_flag_follow_on_panels,
-            self.car_blue_flag_show,
-            self.red_flag_policy,
-            self.timing_master_role,
-            self.use_yellow_flag_for_fcy_enabled,
-            self.track_panels_blacks_display_mode,
-            self.use_three_stripes_yellow_red_flag_enabled
+            self.id,                                        # 1
+            self.circuit_number,                            # 2
+            self.name,                                      # 3
+            self.active,                                    # 4
+            self.map_file_name,                             # 5
+            self.map_file_md5,                              # 6
+            self.sm_map_file_name,                          # 7
+            self.sm_map_file_md5,                           # 8
+            self.sm_map_file_hash,                          # 9
+            self.flag_set,                                  # 10
+            self.password,                                  # 11
+            self.starting_lights_control_unit_id,           # 12
+            self.aks_timing_server_id,                      # 13
+            self.track_side_panel_brightness,               # 14
+            self.info_panel_brightness,                     # 15
+            self.pitlane_panel_brightness,                  # 16
+            self.tla_blue_flag_rendering,                   # 17
+            self.info_panel_rendering,                      # 18
+            self.marshal_console_settings,                  # 19
+            self.white_button_mode,                         # 20
+            self.car_blue_flag_follow_on_panels,            # 21
+            self.car_blue_flag_show,                        # 22
+            self.red_flag_policy,                           # 23
+            self.safety_car_policy,                         # 24
+            self.timing_master_role,                        # 25
+            self.use_yellow_flag_for_fcy_enabled,           # 26
+            self.track_panels_blacks_display_mode,          # 27
+            self.use_three_stripes_yellow_red_flag_enabled, # 28
+            self.rolling_start_speed_settings,              # 29
         )
 
     def __repr__(self):
