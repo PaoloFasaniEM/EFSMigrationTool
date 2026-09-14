@@ -1,7 +1,7 @@
 
 class Circuit:
     """
-    Struttura dati intermedia per un circuito convertito da t_maps → t_circuits.
+    Struttura dati intermedia per un circuito convertito da t_maps -> t_circuits.
     I campi con valore None sono da completare con logica custom.
     """
 

@@ -1,3 +1,6 @@
+import os
+import sys
+
 from PySide6.QtWidgets import QFileDialog
 from PySide6.QtCore import QSettings
 from PySide6.QtGui import QIcon
@@ -9,7 +12,13 @@ class MainWindowController:
 
     def __init__(self, window):
         self.window = window
-        self.window.setWindowIcon(QIcon("resources/icon.png"))
+        
+        if getattr(sys, 'frozen', False):
+            BASE_PATH = os.path.join(os.path.dirname(sys.executable), '_internal')
+        else:
+            BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+        self.window.setWindowIcon(QIcon(os.path.join(BASE_PATH, "resources", "icon.png")))
 
         Logger.init(self._log_to_ui)
 
@@ -34,6 +43,8 @@ class MainWindowController:
         self.window.btnBrowseOld.clicked.connect(self.browse_old_directory)
         self.window.btnBrowseNew.clicked.connect(self.browse_new_directory)
         self.window.btnImport.clicked.connect(self.import_data)
+        self.window.btnCopySessions.clicked.connect(self.copy_sessions)
+        self.window.btnCopyJournal.clicked.connect(self.copy_journal)
 
     def browse_old_directory(self):
         directory = QFileDialog.getExistingDirectory(
@@ -60,9 +71,27 @@ class MainWindowController:
         if not old_path:
             Logger.error("Old installation path missing")
             return
-
         if not new_path:
             Logger.error("New installation path missing")
             return
 
-        self.migration_service.import_all(old_path, new_path)
+        copy_sessions = self.window.chkSessions.isChecked()
+        copy_journal  = self.window.chkJournal.isChecked()
+
+        self.migration_service.import_all(old_path, new_path, copy_sessions, copy_journal)
+
+    def copy_sessions(self):
+        old_path = self.window.txtOldPath.text()
+        new_path = self.window.txtNewPath.text()
+        if not old_path or not new_path:
+            Logger.error("Both paths must be set")
+            return
+        self.migration_service.copy_folder(old_path, new_path, "sessions")
+
+    def copy_journal(self):
+        old_path = self.window.txtOldPath.text()
+        new_path = self.window.txtNewPath.text()
+        if not old_path or not new_path:
+            Logger.error("Both paths must be set")
+            return
+        self.migration_service.copy_folder(old_path, new_path, "journal")

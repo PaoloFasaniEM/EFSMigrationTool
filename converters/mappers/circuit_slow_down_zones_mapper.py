@@ -12,7 +12,7 @@ class CircuitSlowDownZonesMapper:
 
     def _map_row(self, row) -> CircuitSlowDownZone:
         z = CircuitSlowDownZone()
-        z.id                  = row["ZoneId"]
+        z.id                  = row["Number"]
         z.circuit_id          = row["MapId"]
         z.first_sector_number = row["FirstSectorNumber"]
         z.last_sector_number  = row["LastSectorNumber"]

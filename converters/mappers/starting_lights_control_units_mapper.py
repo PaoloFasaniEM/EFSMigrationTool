@@ -15,13 +15,14 @@ class StartingLightsControlUnitsMapper:
         third_party = []
 
         for row in rows:
-            if int(row["ThirdParty"]):
+            is_third_party = row["ThirdParty"]
+            if is_third_party and int(is_third_party):
                 third_party.append(self._map_row_to_third_party(row))
             else:
                 scus.append(self._map_row_to_scu(row))
 
-        Logger.info(f"  → {len(scus)} standard SCUs")
-        Logger.info(f"  → {len(third_party)} third party SCUs")
+        Logger.info(f"  -> {len(scus)} standard SCUs")
+        Logger.info(f"  -> {len(third_party)} third party SCUs")
 
         return scus, third_party
 

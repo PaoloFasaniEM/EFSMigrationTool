@@ -1,5 +1,6 @@
 from structures.circuit_alternative_rule_group import CircuitAlternativeRuleGroup
 from services.logger import Logger
+from utils.db_utils import safe_int
 
 INVALID_FLAG_SET = 2
 
@@ -13,7 +14,7 @@ class CircuitAlternativeRuleGroupsMapper:
 
         result = []
         for row in rows:
-            if int(row["FlagSet"]) == INVALID_FLAG_SET:
+            if safe_int(row["FlagSet"]) == INVALID_FLAG_SET:
                 continue
             r = CircuitAlternativeRuleGroup()
             r.id                = row["GroupId"]

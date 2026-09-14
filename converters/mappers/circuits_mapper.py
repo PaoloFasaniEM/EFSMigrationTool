@@ -119,4 +119,4 @@ class CircuitsMapper:
         """
 
         new_cursor.executemany(sql, [c.to_db_tuple() for c in circuits])
-        Logger.info(f"Written {len(circuits)} circuits to t_circuits")
+        Logger.ok(f"Written {len(circuits)} circuits to t_circuits")

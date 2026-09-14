@@ -1,0 +1,127 @@
+QMainWindow {
+    background-color: #1e1e2e;
+}
+
+QWidget {
+    background-color: #1e1e2e;
+    color: #cdd6f4;
+    font-family: Segoe UI;
+    font-size: 10pt;
+}
+
+QGroupBox {
+    border: 1px solid #45475a;
+    border-radius: 6px;
+    margin-top: 10px;
+    padding-top: 8px;
+    font-weight: bold;
+    color: #89b4fa;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 4px;
+}
+
+QLineEdit {
+    background-color: #313244;
+    border: 1px solid #45475a;
+    border-radius: 4px;
+    padding: 4px 8px;
+    color: #cdd6f4;
+}
+
+QLineEdit:focus {
+    border: 1px solid #89b4fa;
+}
+
+QPushButton {
+    background-color: #313244;
+    border: 1px solid #45475a;
+    border-radius: 4px;
+    padding: 5px 14px;
+    color: #cdd6f4;
+}
+
+QPushButton:hover {
+    background-color: #45475a;
+    border: 1px solid #89b4fa;
+}
+
+QPushButton:pressed {
+    background-color: #89b4fa;
+    color: #1e1e2e;
+}
+
+QPushButton#btnImport {
+    background-color: #89b4fa;
+    color: #1e1e2e;
+    font-weight: bold;
+    font-size: 11pt;
+    border: none;
+    border-radius: 6px;
+}
+
+QPushButton#btnImport:hover {
+    background-color: #b4befe;
+}
+
+QPushButton#btnImport:pressed {
+    background-color: #7287fd;
+}
+
+QPushButton#btnCopySessions, QPushButton#btnCopyJournal {
+    background-color: #45475a;
+    color: #cdd6f4;
+    font-weight: bold;
+    font-size: 11pt;
+    border: none;
+    border-radius: 6px;
+}
+
+QPushButton#btnCopySessions:hover, QPushButton#btnCopyJournal:hover {
+    background-color: #585b70;
+}
+
+QPushButton#btnCopySessions:pressed, QPushButton#btnCopyJournal:pressed {
+    background-color: #6c7086;
+}
+
+QCheckBox {
+    color: #cdd6f4;
+    spacing: 8px;
+}
+
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1px solid #45475a;
+    background-color: #313244;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #89b4fa;
+    border: 1px solid #89b4fa;
+}
+
+QTextEdit {
+    background-color: #181825;
+    border: 1px solid #45475a;
+    border-radius: 4px;
+    color: #cdd6f4;
+    font-family: Consolas, monospace;
+    font-size: 9pt;
+}
+
+QLabel {
+    color: #a6adc8;
+    font-size: 9pt;
+}
+
+QStatusBar {
+    background-color: #181825;
+    color: #6c7086;
+    font-size: 8pt;
+}

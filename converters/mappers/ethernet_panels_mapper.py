@@ -2,6 +2,7 @@ from structures.em_t_panel import EMTPanel
 from structures.em_info_panel import EMInfoPanel
 from structures.third_party_panel import ThirdPartyPanel
 from services.logger import Logger
+from utils.db_utils import safe_int
 
 from structures.efs_panel_enums import (
     EfsPanelModel, EfsPanelType, EfsPanelSize,
@@ -75,14 +76,14 @@ class EthernetPanelsMapper:
         for row in rows:
             if row["ID"] >= THIRD_PARTY_ID_OFFSET:
                 third_party.append(self._map_row_to_third_party(row))
-            elif int(row["Type"]) == 2:
+            elif safe_int(row["Type"]) == 2:
                 info_panels.append(self._map_row_to_info_panel(row))
             else:
                 t_panels.append(self._map_row_to_t_panel(row))
 
-        Logger.info(f"  → {len(t_panels)} t_panels (trackside/pitlane)")
-        Logger.info(f"  → {len(info_panels)} info_panels")
-        Logger.info(f"  → {len(third_party)} third_party_panels")
+        Logger.info(f"  -> {len(t_panels)} t_panels (trackside/pitlane)")
+        Logger.info(f"  -> {len(info_panels)} info_panels")
+        Logger.info(f"  -> {len(third_party)} third_party_panels")
 
         return t_panels, info_panels, third_party
 
@@ -92,8 +93,8 @@ class EthernetPanelsMapper:
 
         p.id                     = row["ID"]
         p.active                 = row["Active"]
-        p.model                  = self._EMT_MODEL.get(int(row["Model"]), 1)
-        p.size                   = self._EMT_SIZE.get(int(row["Size"]), 1)
+        p.model                  = self._EMT_MODEL.get(safe_int(row["Model"]), 1)
+        p.size                   = self._EMT_SIZE.get(safe_int(row["Size"]), 1)
         p.name                   = row["Name"]
         p.address                = row["Address"]
         p.port                   = row["Port"]
@@ -109,8 +110,8 @@ class EthernetPanelsMapper:
 
         p.id      = row["ID"]
         p.active  = row["Active"]
-        p.model   = self._EMI_MODEL.get(int(row["Model"]), 1)
-        p.size    = self._EMI_SIZE.get(int(row["Size"]), 1)
+        p.model   = self._EMI_MODEL.get(safe_int(row["Model"]), 1)
+        p.size    = self._EMI_SIZE.get(safe_int(row["Size"]), 1)
         p.name    = row["Name"]
         p.address = row["Address"]
         p.port    = row["Port"]
@@ -124,8 +125,8 @@ class EthernetPanelsMapper:
         p.id         = row["ID"] - THIRD_PARTY_ID_OFFSET
         p.active     = row["Active"]
         p.name       = row["Name"]
-        p.panel_type = self._TP_TYPE.get(int(row["Type"]), 1)
-        p.aspect_ratio = self._TP_ASPECT_RATIO.get(int(row["Size"]), 0)
+        p.panel_type = self._TP_TYPE.get(safe_int(row["Type"]), 1)
+        p.aspect_ratio = self._TP_ASPECT_RATIO.get(safe_int(row["Size"]), 0)
 
         return p
 

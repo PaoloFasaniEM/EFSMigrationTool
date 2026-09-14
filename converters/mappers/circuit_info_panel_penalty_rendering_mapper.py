@@ -1,6 +1,7 @@
 from structures.circuit_info_panel_penalty_rendering import CircuitInfoPanelPenaltyRendering
 from utils.flag_converter import convert_penalty_flag
 from services.logger import Logger
+from utils.db_utils import safe_int
 
 
 class CircuitInfoPanelPenaltyRenderingMapper:
@@ -14,7 +15,7 @@ class CircuitInfoPanelPenaltyRenderingMapper:
         result = []
 
         for row in rows:
-            old_penalty = int(row["Penalty"])
+            old_penalty = safe_int(row["Penalty"])
             new_penalty = convert_penalty_flag(old_penalty)
 
             if new_penalty is None:

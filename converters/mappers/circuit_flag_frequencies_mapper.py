@@ -3,7 +3,8 @@
 from structures.circuit_flag_frequency import CircuitFlagFrequency
 from utils.flag_converter import convert_flag
 from services.logger import Logger
-
+from utils.flag_converter import EfsPanelFlag
+from utils.db_utils import safe_int
 
 class CircuitFlagFrequenciesMapper:
 
@@ -18,18 +19,22 @@ class CircuitFlagFrequenciesMapper:
         Logger.info(f"Found {len(silent_rows)} records in t_silent_flags")
 
         silent_set: set[tuple] = {
-            (row["MapId"], int(row["Flag"])) for row in silent_rows
+            (row["MapId"], safe_int(row["Flag"])) for row in silent_rows
         }
 
         result = []
 
         for row in freq_rows:
-            old_flag   = int(row["Flag"])
+            old_flag   = safe_int(row["Flag"])
             circuit_id = row["MapId"]
             new_flag   = convert_flag(old_flag)
 
             if new_flag is None:
-                Logger.warn(f"No mapping for old flag {old_flag}, skipping")
+                try:
+                    flag_name = EfsPanelFlag(old_flag).name
+                except ValueError:
+                    flag_name = f"Unknown({old_flag})"
+                Logger.warn(f"No mapping for old flag {flag_name} (circuit {circuit_id}), skipping")
                 continue
 
             f = CircuitFlagFrequency()

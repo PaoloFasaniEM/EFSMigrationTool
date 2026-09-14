@@ -1,5 +1,6 @@
 from structures.circuit_flag_mode import CircuitFlagMode
 from services.logger import Logger
+from utils.db_utils import safe_int
 
 class CircuitFlagModesMapper:
 
@@ -11,7 +12,7 @@ class CircuitFlagModesMapper:
 
     def _map_row(self, row) -> CircuitFlagMode:
         f = CircuitFlagMode()
-        f.id                = int(row["Flag"]) + 1
+        f.id                = safe_int(row["Flag"]) + 1
         f.circuit_id        = row["MapId"]
         f.click_mode        = row["ClickMode"]
         f.double_click_mode = row["DoubleClickMode"]

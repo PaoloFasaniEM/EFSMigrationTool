@@ -1,7 +1,7 @@
 from structures.circuit_speed_limit import CircuitSpeedLimit
 from utils.flag_converter import convert_speed_limit_flag
 from services.logger import Logger
-
+from utils.db_utils import safe_int
 
 class CircuitSpeedLimitsMapper:
 
@@ -14,7 +14,7 @@ class CircuitSpeedLimitsMapper:
         result = []
 
         for row in rows:
-            old_flag   = int(row["Flag"])
+            old_flag   = safe_int(row["Flag"])
             new_flag   = convert_speed_limit_flag(old_flag)
 
             if new_flag is None:

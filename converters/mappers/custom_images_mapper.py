@@ -1,6 +1,7 @@
 from structures.custom_image import CustomImage
 from utils.flag_converter import int_to_rrggbb
 from services.logger import Logger
+from utils.db_utils import safe_int
 
 LOGO_TYPE = 0
 SIGN_TYPE  = 1
@@ -25,7 +26,7 @@ class CustomImagesMapper:
             c = CustomImage()
             c.id               = row["ID"]
             c.name             = row["Name"]
-            c.background_color = int_to_rrggbb(int(row["BackgroundColor"]))
+            c.background_color = int_to_rrggbb(safe_int(row["BackgroundColor"]))
             c.type             = LOGO_TYPE
             result.append(c)
 
@@ -33,7 +34,7 @@ class CustomImagesMapper:
             c = CustomImage()
             c.id               = logo_count + row["ID"]
             c.name             = row["Name"]
-            c.background_color = int_to_rrggbb(int(row["BackgroundColor"]))
+            c.background_color = int_to_rrggbb(safe_int(row["BackgroundColor"]))
             c.type             = SIGN_TYPE
             result.append(c)
 

@@ -1,73 +1,117 @@
-[X] Server.ListeningPort                                        --> Clients.ListeningPort
-[X] Server.StartListenAtStartup                                 --> Clients.StartListeningAtStartup
-[X] Server.ClientCircuitRefreshTime                             --> Clients.CircuitRefreshTime
-[X] Server.ClientCarsRefreshTime                                --> Clients.CarsRefreshTime
-[X] Server.TimingServerSessionsShowLapsAndRunningTimeEnabled    --> TimingServerSessions.ShowLapsAndRunningTimeEnabled
-[X] Server.TimingServerSessionsSessionRecordingEnabled          --> TimingServerSessions.SessionRecordingEnabled
-[X] Server.TimingServerAllowSessionSuspensionEnabled            --> TimingServerSessions.AllowSessionSuspensionEnabled
+[X] Server.ListeningPort --> Clients.ListeningPort
+[X] Server.StartListenAtStartup --> Clients.StartListeningAtStartup
+[X] Server.ClientCircuitRefreshTime --> Clients.CircuitRefreshTime
+[X] Server.ClientCarsRefreshTime --> Clients.CarsRefreshTime
 
-[X] PanelConnections.AutoconnectAtStartup             --> Connection.AutoconnectAtStartup
-[X] PanelConnections.UseTrackPanels                   --> Connection.UsePanels
-[X] PanelConnections.UseCarEquipments                 --> Connection.UseCars
-[X] PanelConnections.UseStartingLightsControlUnits    --> Connection.UseStartingLightsControlUnits
-[X] PanelConnections.UseTimingServers                 --> Connection.UseTimingServers
-[X] PanelConnections.UseThirdPartyPanels              --> Connection.UseThirdPartyPanels
+[X] Server.TimingServerSessionsShowLapsAndRunningTimeEnabled --> TimingServerSessions.ShowLapsAndRunningTimeEnabled
+[X] Server.TimingServerSessionsSessionRecordingEnabled --> TimingServerSessions.SessionRecordingEnabled
+[X] Server.TimingServerAllowSessionSuspensionEnabled --> TimingServerSessions.AllowSessionSuspensionEnabled
 
-[X] AutomaticOperator.Enabled                         --> AutomaticOperator.Enabled
+[X] Server.DatabaseVersion --> eliminato
+[X] Server.DatabaseId --> eliminato
+[X] Server.MarshalConsoleFlagManagementEnabled --> eliminato
+[X] Server.ThirdPartyListeningPort --> eliminato
+[X] Server.ThirdPartyStartListenAtStartup --> eliminato
+[X] Server.UseIblePanelBitmapFix --> eliminato
 
-[X] DumpOptions.EnableSessionDataRecording            --> SessionRecording.EnableRecording
-[X] DumpOptions.SessionDataFileMaxSizeMB              --> SessionRecording.MaxRecordingFileSizeMB
+[X] PanelConnections.AutoconnectAtStartup --> Connection.AutoconnectAtStartup
+[X] PanelConnections.UseTrackPanels --> Connection.UsePanels
+[X] PanelConnections.UseCarEquipments --> Connection.UseCars
+[X] PanelConnections.UseStartingLightsControlUnits --> Connection.UseStartingLightsControlUnits
+[X] PanelConnections.UseTimingServers --> Connection.UseTimingServers
+[X] PanelConnections.UseThirdPartyPanels --> Connection.UseThirdPartyPanels
 
-[X] EthernetConnectionSettings.AesysStatusRefreshTime           --> EMTPanels.StatusRefreshTime
-[X] EthernetConnectionSettings.AesysTxTimeout                   --> EMTPanels.TxTimeout
-[X] EthernetConnectionSettings.AesysPacketSenderAddress         --> EMTPanels.PacketSenderAddress
-[X] EthernetConnectionSettings.AesysConsoleCurrentTimeMaxDelay  --> EMTPanels.ConsoleCurrentTimeMaxDelay
+[X] PanelConnections.ConnectionType --> eliminato
 
-[X] EthernetConnectionSettings.EMLiveBoardStatusRefreshTime     --> EMInfoPanels.StatusRefreshTime
-[X] EthernetConnectionSettings.EMLiveBoardTxTimeout             --> EMInfoPanels.TxTimeout
-[X] EthernetConnectionSettings.EMLiveBoardSyncDelta             --> EMInfoPanels.SyncDelta
+[X] AutomaticOperator.Enabled --> AutomaticOperator.Enabled
 
-[X] ExternalPanelManager.Port                         --> ExternalPanelManager.Port
-[X] ExternalPanelManager.StatusRefreshMs              --> ExternalPanelManager.StatusRefreshMs
-[X] ExternalPanelManager.StartListenAtStartup         --> ExternalPanelManager.StartListenAtStartup
+[X] DumpOptions.EnableSessionDataRecording --> SessionRecording.EnableRecording
+[X] DumpOptions.SessionDataFileMaxSizeMB --> SessionRecording.MaxRecordingFileSizeMB
 
-[X] XmlPermissions.*                                  --> XmlPermissions.* (tutti uguali)
+[X] DumpOptions.EnablePanelsDump --> EMTPanels.EnableDump + EMInfoPanels.EnableDump + EMStartingGridPanels.EnableDump
+[X] DumpOptions.PanelsDumpMaxSize --> EMTPanels.MaxDumpFileSizeMB + EMInfoPanels.MaxDumpFileSizeMB + EMStartingGridPanels.MaxDumpFileSizeMB
 
-[X] SmartMarshalling.LoginFailedTimeout               --> SmartMarshallingClients.LoginFailedReconnectTimeoutMs
+[X] DumpOptions.EnableEpmDump --> ExternalPanelManager.EnableDump
+[X] DumpOptions.EpmDumpMaxSize --> ExternalPanelManager.MaxDumpFileSizeMB
 
-[X] SessionManager.HeartbeatTimeout                   --> SessionManagerFeeders.HeartbeatTimeoutMs
-[X] SessionManager.LoginFailedTimeout                 --> SessionManagerFeeders.LoginFailedReconnectTimeoutMs
+[X] DumpOptions.EnableTppDump --> ThirdPartyPanels.EnableDump
+[X] DumpOptions.TppDumpMaxSize --> ThirdPartyPanels.MaxDumpFileSizeMB
 
-[X] EFSCarsUSB.FollowOnTrackMaxPacketLostDelayMs                --> Cars.FollowOnTrackMaxPacketLostDelayMs
-[X] CarRuntimeParameters.EquipmentOffTimeout                    --> Cars.EquipmentOffTimeoutMs (×1000)
-[X] CarRuntimeParameters.CarParkedTimeout                       --> Cars.CarParkedTimeoutMs (×1000)
-[X] CarRuntimeParameters.MaxDistanceDelta                       --> Cars.MaxDistanceDelta
-[X] CarRuntimeParameters.AccidentAlertEnabled                   --> Cars.AccidentAlertEnabled
-[X] CarRuntimeParameters.AccidentAlertThresholdEdit             --> Cars.AccidentAlertThreshold
-[X] CarRuntimeParameters.HighThresholdDelta                     --> Cars.HighThresholdDeltaMs (×1000)
-[X] CarRuntimeParameters.HighThresholdSpeed                     --> Cars.HighThresholdSpeed
-[X] CarRuntimeParameters.LowThresholdDelta                      --> Cars.LowThresholdDeltaMs (×1000)
-[X] CarRuntimeParameters.LowThresholdSpeed                      --> Cars.LowThresholdSpeed
-[X] CarRuntimeParameters.RaceCarCoverageThresholdSpeed          --> Cars.RaceCarCoverageThresholdSpeed
-[X] CarRuntimeParameters.ServiceVehicleCoverageThresholdSpeed   --> Cars.ServiceVehicleCoverageThresholdSpeed
-[X] CarRuntimeParameters.CoverageThresholdDelta                 --> Cars.CoverageThresholdDeltaMs (×1000)
+[X] DumpOptions.EnableClientDump --> eliminato
+[X] DumpOptions.EnableCircuitsDump --> eliminato
 
-[ ] Location.CountryCode                              --> Location.CountryCode
-[ ] Location.NormLatitude                             --> Location.NormLatitude
-[ ] Location.NormLongitude                            --> Location.NormLongitude
-[ ] Location.Country                                  --> ? (da decidere)
+[X] DumpOptions.Client/Panels/Epm/Circuits/TppDumpFolder --> eliminato
+[X] DumpOptions.Client/Panels/Epm/Circuits/TppDumpTimeout --> eliminato
+[X] DumpOptions.Client/Panels/Epm/CircuitsDumpMaxSize --> eliminato
 
-[X] Synchronization.ListeningPort                --> default nuovo
-[X] Synchronization.PeerServerAddress            --> default nuovo
-[X] Synchronization.PeerServerPort               --> default nuovo
-[X] EMTPanels.EnableDump                         --> default nuovo
-[X] EMTPanels.MaxDumpFileSizeMB                  --> default nuovo
-[X] EMTPanels.ReceivingDataTimeoutMs             --> default nuovo
-[X] EMTPanels.UploadTimeout                      --> default nuovo
-[X] EMInfoPanels.EnableDump                      --> default nuovo
-[X] EMInfoPanels.MaxDumpFileSizeMB               --> default nuovo
-[X] EMInfoPanels.ReceivingDataTimeoutMs          --> default nuovo
-[X] EMStartingGridPanels.*                       --> default nuovo
-[X] ExternalPanelManager.EnableDump              --> default nuovo
-[X] ExternalPanelManager.MaxDumpFileSizeMB       --> default nuovo
-[X] Location.Place                               --> default nuovo
+[X] EthernetConnectionSettings.AesysStatusRefreshTime --> EMTPanels.StatusRefreshTime
+[X] EthernetConnectionSettings.AesysTxTimeout --> EMTPanels.TxTimeout
+[X] EthernetConnectionSettings.AesysUploadTimeout --> EMTPanels.UploadTimeout
+[X] EthernetConnectionSettings.AesysPacketSenderAddress --> EMTPanels.PacketSenderAddress
+[X] EthernetConnectionSettings.AesysConsoleCurrentTimeMaxDelay --> EMTPanels.ConsoleCurrentTimeMaxDelay
+
+[X] EthernetConnectionSettings.AesysUseEnhancedProtocol --> eliminato
+[X] EthernetConnectionSettings.AesysFlagCommandType --> eliminato
+[X] EthernetConnectionSettings.AesysBrightnessFrequencyCommandType --> eliminato
+[X] EthernetConnectionSettings.AesysUseFlagSilentMode --> eliminato
+
+[X] EthernetConnectionSettings.EMLiveBoardStatusRefreshTime --> EMInfoPanels.StatusRefreshTime
+[X] EthernetConnectionSettings.EMLiveBoardTxTimeout --> EMInfoPanels.TxTimeout
+[X] EthernetConnectionSettings.EMLiveBoardSyncDelta --> EMInfoPanels.SyncDelta
+
+[X] EthernetConnectionSettings.Ible* --> eliminati
+
+[X] ExternalPanelManager.Port --> ExternalPanelManager.Port
+[X] ExternalPanelManager.StatusRefreshMs --> ExternalPanelManager.StatusRefreshMs
+[X] ExternalPanelManager.StartListenAtStartup --> ExternalPanelManager.StartListenAtStartup
+[X] ExternalPanelManager.UseSBGInterfaceProtocol --> eliminato
+
+[X] Location.CountryCode --> Location.CountryCode
+[X] Location.NormLatitude --> Location.NormLatitude
+[X] Location.NormLongitude --> Location.NormLongitude
+[X] Location.Place --> Location.Place
+[X] Location.Country --> eliminato
+
+[X] SmartMarshalling.LoginFailedTimeout --> SmartMarshallingClients.LoginFailedReconnectTimeoutMs
+
+[X] SessionManager.HeartbeatTimeout --> SessionManagerFeeders.HeartbeatTimeoutMs
+[X] SessionManager.LoginFailedTimeout --> SessionManagerFeeders.LoginFailedReconnectTimeoutMs
+
+[X] ThirdPartyPanels.LoginFailedTimeout --> ThirdPartyPanels.LoginFailedReconnectTimeoutMs
+
+[X] EFSCarsUSB.FollowOnTrackMaxPacketLostDelayMs --> Cars.FollowOnTrackMaxPacketLostDelayMs
+[X] CarRuntimeParameters.EquipmentOffTimeout --> Cars.EquipmentOffTimeoutMs (x1000)
+[X] CarRuntimeParameters.CarParkedTimeout --> Cars.CarParkedTimeoutMs (x1000)
+[X] CarRuntimeParameters.MaxDistanceDelta --> Cars.MaxDistanceDelta
+[X] CarRuntimeParameters.AccidentAlertEnabled --> Cars.AccidentAlertEnabled
+[X] CarRuntimeParameters.AccidentAlertThresholdEdit --> Cars.AccidentAlertThreshold
+[X] CarRuntimeParameters.HighThresholdDelta --> Cars.HighThresholdDeltaMs (x1000)
+[X] CarRuntimeParameters.HighThresholdSpeed --> Cars.HighThresholdSpeed
+[X] CarRuntimeParameters.LowThresholdDelta --> Cars.LowThresholdDeltaMs (x1000)
+[X] CarRuntimeParameters.LowThresholdSpeed --> Cars.LowThresholdSpeed
+[X] CarRuntimeParameters.RaceCarCoverageThresholdSpeed --> Cars.RaceCarCoverageThresholdSpeed
+[X] CarRuntimeParameters.ServiceVehicleCoverageThresholdSpeed --> Cars.ServiceVehicleCoverageThresholdSpeed
+[X] CarRuntimeParameters.CoverageThresholdDelta --> Cars.CoverageThresholdDeltaMs (x1000)
+
+[X] XmlPermissions.* --> XmlPermissions.* (tutti uguali)
+
+[X] Logger.* --> eliminati
+[X] EFSFileDialog.* --> eliminati
+[X] USBConnectionSettings.* --> eliminati
+[X] Authentication.* --> eliminati
+[X] CustomLogo.* --> eliminati
+[X] CustomSign.* --> eliminati
+[X] AesysColorCorrection.* --> eliminati
+[X] StartingLightControlUnits.* --> eliminati
+[X] EFSUPSDiagnostics.* --> eliminati
+[X] Remainders.* --> eliminati
+[X] Journal.* --> eliminati
+
+[~] Synchronization.* --> default nuovo
+
+[~] EMTPanels.ReceivingDataTimeoutMs --> default nuovo
+[~] EMInfoPanels.ReceivingDataTimeoutMs --> default nuovo
+
+[~] EMStartingGridPanels.StatusRefreshTime --> default nuovo
+[~] EMStartingGridPanels.ReceivingDataTimeoutMs --> default nuovo
+[~] EMStartingGridPanels.TxTimeout --> default nuovo

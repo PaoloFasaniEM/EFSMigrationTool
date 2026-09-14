@@ -35,8 +35,8 @@ Tabelle vecchie --> nuove
 [X] t_default_speed_limits --> t_default_speed_limits (autoprodotta)
 [X] t_championships --> t_championships
 [X] t_panel_sets --> t_circuit_panel_sets
-[ ] t_panels + t_panel_names --> t_circuit_panels (da completare)
-[ ] t_parameters --> t_parameters (da completare)
+[X] t_panels + t_panel_names --> t_circuit_panels
+[X] t_parameters --> t_parameters
 
 [X] Starting Grid assenti in EFS --> t_em_starting_grid_panels 
 [X] t_usb_panels --> Assenti in EFS nuovo
@@ -48,3 +48,5 @@ COPIA FILE:
 
 [X] Copia delle mappe e delle SMMappe
 [X] Copia delle sole sources delle CustomImages, (al primo avvio vengono create tutte le immagini derivate e le tabelle xxx_bitmaps)
+[X] Copia cartella sessions (opzionale, checkbox in UI)
+[X] Copia cartella journal (opzionale, checkbox in UI)

@@ -9,6 +9,7 @@ from converters.mappers.circuits_mapper import CircuitsMapper
 from converters.mappers.circuit_disabled_rules_mapper import CircuitDisabledRulesMapper
 from converters.mappers.circuit_alternative_rule_groups_mapper import CircuitAlternativeRuleGroupsMapper
 from converters.mappers.circuit_panel_sets_mapper import CircuitPanelSetsMapper
+from converters.mappers.circuit_panels_mapper import CircuitPanelsMapper
 from converters.mappers.circuit_rule_sets_mapper import CircuitRuleSetsMapper
 from converters.mappers.saved_rule_sets_mapper import SavedRuleSetsMapper
 from converters.mappers.saved_rule_sets_alternative_groups_mapper import SavedRuleSetsAlternativeGroupsMapper
@@ -44,6 +45,7 @@ class DbConverter:
         self.circuit_disabled_rules_mapper                  = CircuitDisabledRulesMapper()
         self.circuit_alternative_rule_groups_mapper         = CircuitAlternativeRuleGroupsMapper()
         self.circuit_panel_sets_mapper                      = CircuitPanelSetsMapper()
+        self.circuit_panels_mapper                          = CircuitPanelsMapper()
         self.circuit_rule_sets_mapper                       = CircuitRuleSetsMapper()
         self.saved_rule_sets_mapper                         = SavedRuleSetsMapper()
         self.saved_rule_sets_alternative_groups_mapper      = SavedRuleSetsAlternativeGroupsMapper()
@@ -109,122 +111,126 @@ class DbConverter:
 
     def _convert_all_tables(self, old_cursor, new_cursor):
 
-            #t_parameters
-            old_parameters = self.parameters_mapper._read_(old_cursor)
-            self.parameters_mapper._write_(new_cursor, old_parameters)
+        #t_parameters
+        old_parameters = self.parameters_mapper._read_(old_cursor)
+        self.parameters_mapper._write_(new_cursor, old_parameters)
 
-            #t_alkamel_timing
-            alkamel_timings = self.alkamel_timing_mapper._read_(old_cursor)
-            self.alkamel_timing_mapper._write_(new_cursor, alkamel_timings)
+        #t_alkamel_timing
+        alkamel_timings = self.alkamel_timing_mapper._read_(old_cursor)
+        self.alkamel_timing_mapper._write_(new_cursor, alkamel_timings)
 
-            #t_cars
-            cars = self.cars_mapper._read_(old_cursor)
-            self.cars_mapper._write_(new_cursor, cars)
+        #t_cars
+        cars = self.cars_mapper._read_(old_cursor)
+        self.cars_mapper._write_(new_cursor, cars)
 
-            #t_championships
-            championships = self.championships_mapper._read_(old_cursor)
-            self.championships_mapper._write_(new_cursor, championships)
+        #t_championships
+        championships = self.championships_mapper._read_(old_cursor)
+        self.championships_mapper._write_(new_cursor, championships)
 
-            #t_circuits
-            circuits = self.circuits_mapper._read_(old_cursor)
-            self.circuits_mapper._write_(new_cursor, circuits)
+        #t_circuits
+        circuits = self.circuits_mapper._read_(old_cursor)
+        self.circuits_mapper._write_(new_cursor, circuits)
 
-            #t_circuit_disabled_rules
-            circuit_disabled_rules = self.circuit_disabled_rules_mapper._read_(old_cursor)
-            self.circuit_disabled_rules_mapper._write_(new_cursor, circuit_disabled_rules)
+        #t_circuit_alternative_rule_groups
+        circuit_alternative_rule_groups = self.circuit_alternative_rule_groups_mapper._read_(old_cursor)
+        self.circuit_alternative_rule_groups_mapper._write_(new_cursor, circuit_alternative_rule_groups)
 
-            #t_circuit_alternative_rule_groups
-            circuit_alternative_rule_groups = self.circuit_alternative_rule_groups_mapper._read_(old_cursor)
-            self.circuit_alternative_rule_groups_mapper._write_(new_cursor, circuit_alternative_rule_groups)
+        #t_circuit_disabled_rules
+        circuit_disabled_rules = self.circuit_disabled_rules_mapper._read_(old_cursor)
+        self.circuit_disabled_rules_mapper._write_(new_cursor, circuit_disabled_rules)
 
-            #t_circuit_panel_sets
-            circuit_panel_sets = self.circuit_panel_sets_mapper._read_(old_cursor)
-            self.circuit_panel_sets_mapper._write_(new_cursor, circuit_panel_sets)
+        #t_circuit_flag_frequencies
+        circuit_flag_frequencies = self.circuit_flag_frequencies_mapper._read_(old_cursor)
+        self.circuit_flag_frequencies_mapper._write_(new_cursor, circuit_flag_frequencies)
 
-            #t_circuit_rule_sets
-            circuit_rule_sets = self.circuit_rule_sets_mapper._read_(old_cursor)
-            self.circuit_rule_sets_mapper._write_(new_cursor, circuit_rule_sets)
+        #t_circuit_flag_modes
+        circuit_flag_modes = self.circuit_flag_modes_mapper._read_(old_cursor)
+        self.circuit_flag_modes_mapper._write_(new_cursor, circuit_flag_modes)
 
-            #t_saved_rule_sets
-            saved_rule_sets = self.saved_rule_sets_mapper._read_(old_cursor)
-            self.saved_rule_sets_mapper._write_(new_cursor, saved_rule_sets)
+        #t_circuit_info_panel_penalty_rendering
+        circuit_info_panel_penalty_rendering = self.circuit_info_panel_penalty_rendering_mapper._read_(old_cursor)
+        self.circuit_info_panel_penalty_rendering_mapper._write_(new_cursor, circuit_info_panel_penalty_rendering)
 
-            #t_saved_rule_sets_alternative_groups
-            saved_rule_sets_alternative_groups = self.saved_rule_sets_alternative_groups_mapper._read_(old_cursor)
-            self.saved_rule_sets_alternative_groups_mapper._write_(new_cursor, saved_rule_sets_alternative_groups)
+        #t_circuit_panel_sets
+        circuit_panel_sets = self.circuit_panel_sets_mapper._read_(old_cursor)
+        self.circuit_panel_sets_mapper._write_(new_cursor, circuit_panel_sets)
 
-            #t_saved_rule_sets_disabled
-            saved_rule_sets_disabled = self.saved_rule_sets_disabled_mapper._read_(old_cursor)
-            self.saved_rule_sets_disabled_mapper._write_(new_cursor, saved_rule_sets_disabled)
+        #t_circuit_panels
+        circuit_panels = self.circuit_panels_mapper._read_(old_cursor)
+        self.circuit_panels_mapper._write_(new_cursor, circuit_panels)
 
-            #t_circuit_flag_frequencies
-            circuit_flag_frequencies = self.circuit_flag_frequencies_mapper._read_(old_cursor)
-            self.circuit_flag_frequencies_mapper._write_(new_cursor, circuit_flag_frequencies)
+        #t_circuit_rule_sets
+        circuit_rule_sets = self.circuit_rule_sets_mapper._read_(old_cursor)
+        self.circuit_rule_sets_mapper._write_(new_cursor, circuit_rule_sets)
 
-            #t_circuit_info_panel_penalty_rendering
-            circuit_info_panel_penalty_rendering = self.circuit_info_panel_penalty_rendering_mapper._read_(old_cursor)
-            self.circuit_info_panel_penalty_rendering_mapper._write_(new_cursor, circuit_info_panel_penalty_rendering)
+        #t_circuit_sectors
+        circuit_sectors = self.circuit_sectors_mapper._read_(old_cursor)
+        self.circuit_sectors_mapper._write_(new_cursor, circuit_sectors)
 
-            #t_circuit_sectors
-            circuit_sectors = self.circuit_sectors_mapper._read_(old_cursor)
-            self.circuit_sectors_mapper._write_(new_cursor, circuit_sectors)
+        #t_circuit_slow_down_zones
+        circuit_slow_down_zones = self.circuit_slow_down_zones_mapper._read_(old_cursor)
+        self.circuit_slow_down_zones_mapper._write_(new_cursor, circuit_slow_down_zones)
 
-            #t_circuit_speed_limits
-            circuit_speed_limits = self.circuit_speed_limits_mapper._read_(old_cursor)
-            self.circuit_speed_limits_mapper._write_(new_cursor, circuit_speed_limits)
+        #t_circuit_speed_limits
+        circuit_speed_limits = self.circuit_speed_limits_mapper._read_(old_cursor)
+        self.circuit_speed_limits_mapper._write_(new_cursor, circuit_speed_limits)
 
-            #t_custom_images
-            custom_images = self.custom_images_mapper._read_(old_cursor)
-            self.custom_images_mapper._write_(new_cursor, custom_images)
+        #t_custom_images
+        custom_images = self.custom_images_mapper._read_(old_cursor)
+        self.custom_images_mapper._write_(new_cursor, custom_images)
 
-            #t_em_info_panel_custom_images
-            em_info_panel_custom_images = self.em_info_panel_custom_images_mapper._read_(old_cursor)
-            self.em_info_panel_custom_images_mapper._write_(new_cursor, em_info_panel_custom_images)
+        #t_em_info_panel_custom_images
+        em_info_panel_custom_images = self.em_info_panel_custom_images_mapper._read_(old_cursor)
+        self.em_info_panel_custom_images_mapper._write_(new_cursor, em_info_panel_custom_images)
 
-            #t_em_t_panel_custom_images
-            em_t_panel_custom_images = self.em_t_panel_custom_images_mapper._read_(old_cursor)
-            self.em_t_panel_custom_images_mapper._write_(new_cursor, em_t_panel_custom_images)
+        #t_em_t_panel_custom_images
+        em_t_panel_custom_images = self.em_t_panel_custom_images_mapper._read_(old_cursor)
+        self.em_t_panel_custom_images_mapper._write_(new_cursor, em_t_panel_custom_images)
 
-            #t_marshal_console_button_flag_modes
-            circuit_flag_modes = self.circuit_flag_modes_mapper._read_(old_cursor)
-            self.circuit_flag_modes_mapper._write_(new_cursor, circuit_flag_modes)
+        #t_em_t_panels + t_em_info_panels + t_third_party_panels
+        t_panels, info_panels, third_party = self.ethernet_panels_mapper._read_(old_cursor)
+        self.ethernet_panels_mapper._write_(new_cursor, t_panels, info_panels, third_party)
 
-            #t_slow_zones
-            circuit_slow_down_zones = self.circuit_slow_down_zones_mapper._read_(old_cursor)
-            self.circuit_slow_down_zones_mapper._write_(new_cursor, circuit_slow_down_zones)
+        #t_saved_grid_countdowns
+        saved_grid_countdowns = self.saved_grid_countdowns_mapper._read_(old_cursor)
+        self.saved_grid_countdowns_mapper._write_(new_cursor, saved_grid_countdowns)
 
-            #t_ethernet_panels
-            t_panels, info_panels, third_party = self.ethernet_panels_mapper._read_(old_cursor)
-            self.ethernet_panels_mapper._write_(new_cursor, t_panels, info_panels, third_party)
+        #t_saved_messages
+        saved_messages = self.saved_messages_mapper._read_(old_cursor)
+        self.saved_messages_mapper._write_(new_cursor, saved_messages)
 
-            #t_saved_grid_countdowns
-            saved_grid_countdowns = self.saved_grid_countdowns_mapper._read_(old_cursor)
-            self.saved_grid_countdowns_mapper._write_(new_cursor, saved_grid_countdowns)
+        #t_saved_rule_sets
+        saved_rule_sets = self.saved_rule_sets_mapper._read_(old_cursor)
+        self.saved_rule_sets_mapper._write_(new_cursor, saved_rule_sets)
 
-            #t_saved_messages
-            saved_messages = self.saved_messages_mapper._read_(old_cursor)
-            self.saved_messages_mapper._write_(new_cursor, saved_messages)
+        #t_saved_rule_sets_alternative_groups
+        saved_rule_sets_alternative_groups = self.saved_rule_sets_alternative_groups_mapper._read_(old_cursor)
+        self.saved_rule_sets_alternative_groups_mapper._write_(new_cursor, saved_rule_sets_alternative_groups)
 
-            #t_saved_sessions
-            saved_sessions = self.saved_sessions_mapper._read_(old_cursor)
-            self.saved_sessions_mapper._write_(new_cursor, saved_sessions)
+        #t_saved_rule_sets_disabled
+        saved_rule_sets_disabled = self.saved_rule_sets_disabled_mapper._read_(old_cursor)
+        self.saved_rule_sets_disabled_mapper._write_(new_cursor, saved_rule_sets_disabled)
 
-            #t_session_manager_feeders
-            session_manager_feeders = self.session_manager_feeders_mapper._read_(old_cursor)
-            self.session_manager_feeders_mapper._write_(new_cursor, session_manager_feeders)
+        #t_saved_sessions
+        saved_sessions = self.saved_sessions_mapper._read_(old_cursor)
+        self.saved_sessions_mapper._write_(new_cursor, saved_sessions)
 
-            #t_smart_marshalling_clients
-            smart_marshalling_clients = self.smart_marshalling_clients_mapper._read_(old_cursor)
-            self.smart_marshalling_clients_mapper._write_(new_cursor, smart_marshalling_clients)
+        #t_session_manager_feeders
+        session_manager_feeders = self.session_manager_feeders_mapper._read_(old_cursor)
+        self.session_manager_feeders_mapper._write_(new_cursor, session_manager_feeders)
 
-            #t_starting_light_control_units
-            scus, third_party_scus = self.starting_lights_control_units_mapper._read_(old_cursor)
-            self.starting_lights_control_units_mapper._write_(new_cursor, scus, third_party_scus)
+        #t_smart_marshalling_clients
+        smart_marshalling_clients = self.smart_marshalling_clients_mapper._read_(old_cursor)
+        self.smart_marshalling_clients_mapper._write_(new_cursor, smart_marshalling_clients)
 
-            #t_third_party_panels_servers
-            third_party_panels_servers = self.third_party_panels_servers_mapper._read_(old_cursor)
-            self.third_party_panels_servers_mapper._write_(new_cursor, third_party_panels_servers)
+        #t_starting_lights_control_units + t_third_party_scus
+        scus, third_party_scus = self.starting_lights_control_units_mapper._read_(old_cursor)
+        self.starting_lights_control_units_mapper._write_(new_cursor, scus, third_party_scus)
 
-            #t_vic_flag_hex_codes
-            vic_flag_hex_codes = self.vic_flag_hex_codes_mapper._read_(old_cursor)
-            self.vic_flag_hex_codes_mapper._write_(new_cursor, vic_flag_hex_codes)
+        #t_third_party_panels_servers
+        third_party_panels_servers = self.third_party_panels_servers_mapper._read_(old_cursor)
+        self.third_party_panels_servers_mapper._write_(new_cursor, third_party_panels_servers)
+
+        #t_vic_flag_hex_codes
+        vic_flag_hex_codes = self.vic_flag_hex_codes_mapper._read_(old_cursor)
+        self.vic_flag_hex_codes_mapper._write_(new_cursor, vic_flag_hex_codes)

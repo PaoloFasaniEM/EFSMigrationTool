@@ -10,7 +10,6 @@ class ParametersMapper:
         rows = old_cursor.fetchall()
         Logger.info(f"Found {len(rows)} records in t_parameters")
 
-        # indice (group, name) → value per lookup rapido
         return {
             (row["ParameterGroup"], row["ParameterName"]): row["ParameterValue"]
             for row in rows
@@ -49,27 +48,38 @@ class ParametersMapper:
             ("Clients", "CarsRefreshTime",           get("Server", "ClientCarsRefreshTime")),
 
             # AutomaticOperator
-            ("AutomaticOperator", "Enabled",         get("AutomaticOperator", "Enabled")),
+            ("AutomaticOperator", "Enabled", get("AutomaticOperator", "Enabled")),
 
             # SessionRecording
-            ("SessionRecording", "EnableRecording",         get("DumpOptions", "EnableSessionDataRecording")),
-            ("SessionRecording", "MaxRecordingFileSizeMB",  get("DumpOptions", "SessionDataFileMaxSizeMB")),
+            ("SessionRecording", "EnableRecording",        get("DumpOptions", "EnableSessionDataRecording")),
+            ("SessionRecording", "MaxRecordingFileSizeMB", get("DumpOptions", "SessionDataFileMaxSizeMB")),
 
             # EMTPanels
-            ("EMTPanels", "StatusRefreshTime",          get("EthernetConnectionSettings", "AesysStatusRefreshTime")),
-            ("EMTPanels", "TxTimeout",                  get("EthernetConnectionSettings", "AesysTxTimeout")),
-            ("EMTPanels", "PacketSenderAddress",         get("EthernetConnectionSettings", "AesysPacketSenderAddress")),
-            ("EMTPanels", "ConsoleCurrentTimeMaxDelay",  get("EthernetConnectionSettings", "AesysConsoleCurrentTimeMaxDelay")),
+            ("EMTPanels", "EnableDump",              get("DumpOptions", "EnablePanelsDump")),
+            ("EMTPanels", "MaxDumpFileSizeMB",       get("DumpOptions", "PanelsDumpMaxSize")),
+            ("EMTPanels", "StatusRefreshTime",       get("EthernetConnectionSettings", "AesysStatusRefreshTime")),
+            ("EMTPanels", "TxTimeout",               get("EthernetConnectionSettings", "AesysTxTimeout")),
+            ("EMTPanels", "UploadTimeout",           get("EthernetConnectionSettings", "AesysUploadTimeout")),
+            ("EMTPanels", "PacketSenderAddress",     get("EthernetConnectionSettings", "AesysPacketSenderAddress")),
+            ("EMTPanels", "ConsoleCurrentTimeMaxDelay", get("EthernetConnectionSettings", "AesysConsoleCurrentTimeMaxDelay")),
 
             # EMInfoPanels
-            ("EMInfoPanels", "StatusRefreshTime",  get("EthernetConnectionSettings", "EMLiveBoardStatusRefreshTime")),
-            ("EMInfoPanels", "TxTimeout",          get("EthernetConnectionSettings", "EMLiveBoardTxTimeout")),
-            ("EMInfoPanels", "SyncDelta",          get("EthernetConnectionSettings", "EMLiveBoardSyncDelta")),
+            ("EMInfoPanels", "EnableDump",        get("DumpOptions", "EnablePanelsDump")),
+            ("EMInfoPanels", "MaxDumpFileSizeMB", get("DumpOptions", "PanelsDumpMaxSize")),
+            ("EMInfoPanels", "StatusRefreshTime", get("EthernetConnectionSettings", "EMLiveBoardStatusRefreshTime")),
+            ("EMInfoPanels", "TxTimeout",         get("EthernetConnectionSettings", "EMLiveBoardTxTimeout")),
+            ("EMInfoPanels", "SyncDelta",         get("EthernetConnectionSettings", "EMLiveBoardSyncDelta")),
+
+            # EMStartingGridPanels
+            ("EMStartingGridPanels", "EnableDump",        get("DumpOptions", "EnablePanelsDump")),
+            ("EMStartingGridPanels", "MaxDumpFileSizeMB", get("DumpOptions", "PanelsDumpMaxSize")),
 
             # ExternalPanelManager
-            ("ExternalPanelManager", "Port",                get("ExternalPanelManager", "Port")),
-            ("ExternalPanelManager", "StatusRefreshMs",     get("ExternalPanelManager", "StatusRefreshMs")),
+            ("ExternalPanelManager", "Port",                 get("ExternalPanelManager", "Port")),
+            ("ExternalPanelManager", "StatusRefreshMs",      get("ExternalPanelManager", "StatusRefreshMs")),
             ("ExternalPanelManager", "StartListenAtStartup", get("ExternalPanelManager", "StartListenAtStartup")),
+            ("ExternalPanelManager", "EnableDump",           get("DumpOptions", "EnableEpmDump")),
+            ("ExternalPanelManager", "MaxDumpFileSizeMB",    get("DumpOptions", "EpmDumpMaxSize")),
 
             # XmlPermissions
             ("XmlPermissions", "Configuration",         get("XmlPermissions", "Configuration")),
@@ -90,31 +100,37 @@ class ParametersMapper:
             ("XmlPermissions", "SetPanelFlags",         get("XmlPermissions", "SetPanelFlags")),
 
             # SessionManagerFeeders
-            ("SessionManagerFeeders", "HeartbeatTimeoutMs",             get("SessionManager", "HeartbeatTimeout")),
-            ("SessionManagerFeeders", "LoginFailedReconnectTimeoutMs",  get("SessionManager", "LoginFailedTimeout")),
+            ("SessionManagerFeeders", "HeartbeatTimeoutMs",            get("SessionManager", "HeartbeatTimeout")),
+            ("SessionManagerFeeders", "LoginFailedReconnectTimeoutMs", get("SessionManager", "LoginFailedTimeout")),
 
             # SmartMarshallingClients
             ("SmartMarshallingClients", "LoginFailedReconnectTimeoutMs", get("SmartMarshalling", "LoginFailedTimeout")),
 
-            # Cars
-            ("Cars", "FollowOnTrackMaxPacketLostDelayMs",       get("EFSCarsUSB", "FollowOnTrackMaxPacketLostDelayMs")),
-            ("Cars", "EquipmentOffTimeoutMs",                   get_ms("CarRuntimeParameters", "EquipmentOffTimeout")),
-            ("Cars", "CarParkedTimeoutMs",                      get_ms("CarRuntimeParameters", "CarParkedTimeout")),
-            ("Cars", "MaxDistanceDelta",                        get("CarRuntimeParameters", "MaxDistanceDelta")),
-            ("Cars", "AccidentAlertEnabled",                    get("CarRuntimeParameters", "AccidentAlertEnabled")),
-            ("Cars", "AccidentAlertThreshold",                  get("CarRuntimeParameters", "AccidentAlertThresholdEdit")),
-            ("Cars", "HighThresholdDeltaMs",                    get_ms("CarRuntimeParameters", "HighThresholdDelta")),
-            ("Cars", "HighThresholdSpeed",                      get("CarRuntimeParameters", "HighThresholdSpeed")),
-            ("Cars", "LowThresholdDeltaMs",                     get_ms("CarRuntimeParameters", "LowThresholdDelta")),
-            ("Cars", "LowThresholdSpeed",                       get("CarRuntimeParameters", "LowThresholdSpeed")),
-            ("Cars", "RaceCarCoverageThresholdSpeed",            get("CarRuntimeParameters", "RaceCarCoverageThresholdSpeed")),
-            ("Cars", "ServiceVehicleCoverageThresholdSpeed",     get("CarRuntimeParameters", "ServiceVehicleCoverageThresholdSpeed")),
-            ("Cars", "CoverageThresholdDeltaMs",                get_ms("CarRuntimeParameters", "CoverageThresholdDelta")),
+            # ThirdPartyPanels
+            ("ThirdPartyPanels", "LoginFailedReconnectTimeoutMs", get("ThirdPartyPanels", "LoginFailedTimeout")),
+            ("ThirdPartyPanels", "EnableDump",                    get("DumpOptions", "EnableTppDump")),
+            ("ThirdPartyPanels", "MaxDumpFileSizeMB",             get("DumpOptions", "TppDumpMaxSize")),
 
-            # Location (CountryCode, NormLatitude, NormLongitude da decidere)
-            ("Location", "CountryCode",    get("Location", "CountryCode")),
-            ("Location", "NormLatitude",   get("Location", "NormLatitude")),
-            ("Location", "NormLongitude",  get("Location", "NormLongitude")),
+            # Cars
+            ("Cars", "FollowOnTrackMaxPacketLostDelayMs",      get("EFSCarsUSB", "FollowOnTrackMaxPacketLostDelayMs")),
+            ("Cars", "EquipmentOffTimeoutMs",                  get_ms("CarRuntimeParameters", "EquipmentOffTimeout")),
+            ("Cars", "CarParkedTimeoutMs",                     get_ms("CarRuntimeParameters", "CarParkedTimeout")),
+            ("Cars", "MaxDistanceDelta",                       get("CarRuntimeParameters", "MaxDistanceDelta")),
+            ("Cars", "AccidentAlertEnabled",                   get("CarRuntimeParameters", "AccidentAlertEnabled")),
+            ("Cars", "AccidentAlertThreshold",                 get("CarRuntimeParameters", "AccidentAlertThresholdEdit")),
+            ("Cars", "HighThresholdDeltaMs",                   get_ms("CarRuntimeParameters", "HighThresholdDelta")),
+            ("Cars", "HighThresholdSpeed",                     get("CarRuntimeParameters", "HighThresholdSpeed")),
+            ("Cars", "LowThresholdDeltaMs",                    get_ms("CarRuntimeParameters", "LowThresholdDelta")),
+            ("Cars", "LowThresholdSpeed",                      get("CarRuntimeParameters", "LowThresholdSpeed")),
+            ("Cars", "RaceCarCoverageThresholdSpeed",          get("CarRuntimeParameters", "RaceCarCoverageThresholdSpeed")),
+            ("Cars", "ServiceVehicleCoverageThresholdSpeed",   get("CarRuntimeParameters", "ServiceVehicleCoverageThresholdSpeed")),
+            ("Cars", "CoverageThresholdDeltaMs",               get_ms("CarRuntimeParameters", "CoverageThresholdDelta")),
+
+            # Location
+            ("Location", "CountryCode",   get("Location", "CountryCode")),
+            ("Location", "NormLatitude",  get("Location", "NormLatitude")),
+            ("Location", "NormLongitude", get("Location", "NormLongitude")),
+            ("Location", "Place",         get("Location", "Place")),
         ]
 
         for group, name, value in mappings:

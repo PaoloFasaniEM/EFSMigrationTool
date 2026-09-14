@@ -1,5 +1,6 @@
 from structures.circuit_sector import CircuitSector
 from services.logger import Logger
+from utils.db_utils import safe_int
 
 class CircuitSectorsMapper:
 
@@ -32,9 +33,9 @@ class CircuitSectorsMapper:
 
         for row in sdz_rows:
             circuit_id = row["MapId"]
-            sdz_number = row["ZoneId"]
-            first      = int(row["FirstSectorNumber"])
-            last       = int(row["LastSectorNumber"])
+            sdz_number = row["Number"]
+            first      = safe_int(row["FirstSectorNumber"])
+            last       = safe_int(row["LastSectorNumber"])
 
             for sector_id in range(first, last + 1):
                 key = (circuit_id, sector_id)

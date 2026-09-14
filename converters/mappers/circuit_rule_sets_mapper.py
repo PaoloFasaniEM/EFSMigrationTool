@@ -1,5 +1,6 @@
 from structures.circuit_rule_set import CircuitRuleSet
 from services.logger import Logger
+from utils.db_utils import safe_int
 
 INVALID_FLAG_SET = 2
 
@@ -13,7 +14,7 @@ class CircuitRuleSetsMapper:
 
         result = []
         for row in rows:
-            if int(row["FlagSet"]) == INVALID_FLAG_SET:
+            if safe_int(row["FlagSet"]) == INVALID_FLAG_SET:
                 continue
             r = CircuitRuleSet()
             r.id         = row["SetId"]

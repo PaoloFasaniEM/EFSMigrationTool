@@ -18,10 +18,12 @@ class MapsConverter:
             raise FileNotFoundError(f"Missing DB: {old_db_path}")
 
         if not os.path.exists(old_maps_dir):
-            raise FileNotFoundError(f"Missing folder: {old_maps_dir}")
+            Logger.warn(f"Maps folder missing, skipping: {old_maps_dir}")
+            return
 
         if not os.path.exists(old_sm_maps_dir):
-            raise FileNotFoundError(f"Missing folder: {old_sm_maps_dir}")
+            Logger.warn(f"SM Maps folder missing, skipping: {old_sm_maps_dir}")
+            return
 
         os.makedirs(new_maps_root, exist_ok=True)
 
